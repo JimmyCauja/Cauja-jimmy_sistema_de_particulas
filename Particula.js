@@ -1,18 +1,28 @@
 class Particula {
 	constructor() {
-		this.tamanoInicial = random(10, 50);
+		this.boli = (1) < 1 ? true : false;
+
+		if (this.boli) {
+			this.color = color(25, 2, random(100, 255), 100);
+			this.vel = createVector(0, random(1, 1));
+			this.vel.rotate(random(360));
+		}
+		
+		else {
+			this.color = color(255, 0, random(100, 255), 100);
+			this.vel = createVector(0, random(9, 8));
+			this.vel.rotate(random(-20, 20));
+		}
+
+		this.tamanoInicial = random(20, 60);
 		this.tamano = this.tamanoInicial;
 		this.estaMuerta = false;
-		this.tiempoDeVidaInicial = Math.ceil(random(10, 300));
+		this.tiempoDeVidaInicial = Math.ceil(random(50, 150));
 		this.tiempoDeVida = this.tiempoDeVidaInicial;
 
-		this.pos = createVector(mouseX, mouseY);
+		this.pos = createVector(random(windowWidth, windowHeight));
 
-		this.vel = createVector(0, random(1, 3));
-		this.vel.rotate(random(360));
-
-		this.g = createVector(0.1, -0.05);
-		this.color = color(random(100, 200), 255, 0, 50);
+		this.g = createVector(0, -0.05);
 	}
 	// Método ==> method update
 	actualizar() {
@@ -23,8 +33,8 @@ class Particula {
 			this.tiempoDeVida,
 			0,
 			this.tiempoDeVidaInicial,
-			this.tamanoInicial,
-			0
+			0,
+			this.tamanoInicial
 		);
 
 		this.tiempoDeVida -= 1;
@@ -32,6 +42,9 @@ class Particula {
 		if (this.tiempoDeVida <= 0) {
 			this.estaMuerta = true;
 			print('ups, me morí!');
+			noFill();
+			stroke(this.color);
+			strokeWeight();
 			circle(this.pos.x, this.pos.y, this.tamanoInicial);
 		}
 	}
